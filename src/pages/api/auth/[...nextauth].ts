@@ -34,6 +34,13 @@ export default NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
+        if (
+          !credentials.email ||
+          credentials.email.length < 3 ||
+          !credentials.password ||
+          credentials.password.length < 3
+        )
+          return;
         try {
           const { login } = await gqlClient.request<LoginResStrapi>(
             GQL_MUTATION_AUTHENTICATE_USER,

@@ -1,7 +1,7 @@
 import * as Styled from './styles';
 
 export type WrapperProps = {
-  children?: string;
+  children?: React.ReactNode;
 };
 
 export const Wrapper = ({ children }: WrapperProps) => {
