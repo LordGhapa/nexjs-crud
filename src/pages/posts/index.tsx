@@ -1,14 +1,12 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { Wrapper } from '../components/Wrapper';
-import { useSession } from 'next-auth/react';
+import { Wrapper } from '../../components/Wrapper';
 
 export default function Index() {
-  const { data: Session } = useSession();
   return (
     <>
       <Wrapper>
-        <h1>Ola {Session?.user?.name || 'Desconhecido'}</h1>
+        <h1>posts</h1>
       </Wrapper>
     </>
   );

@@ -1,3 +1,4 @@
+import { Menu } from '../Menu';
 import * as Styled from './styles';
 
 export type WrapperProps = {
@@ -5,5 +6,13 @@ export type WrapperProps = {
 };
 
 export const Wrapper = ({ children }: WrapperProps) => {
-  return <Styled.Wrapper>{children}</Styled.Wrapper>;
+  return (
+    <>
+      <Styled.Wrapper>
+        <Menu />
+        {children}
+      </Styled.Wrapper>
+      ;
+    </>
+  );
 };
