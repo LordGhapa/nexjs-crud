@@ -113,6 +113,7 @@ export const Input = styled.input<
       as === 'textarea' &&
       css`
       min-height: ${theme.frameSizes.xsmall};
+      resize:vertical;
     `
     }
     ${!!errorMessage && onInputError(theme, errorMessage)}
@@ -142,6 +143,7 @@ export const Label = styled.label<{ element: string }>`
       css`
       top: ${theme.spacings.large};
       transform: translate(0, -50%);
+
     `
     }
   `}

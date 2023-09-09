@@ -2,17 +2,17 @@ export type Posts = {
   data: Post[];
 };
 
-type Post = {
+export type Post = {
   id: string;
   attributes: {
     title: string;
     auth_text: string;
-    user: {
+    user?: {
       data: {
         id: string;
         attributes: { username: string; email: string };
       };
     };
-    createdAt: string;
+    createdAt?: string;
   };
 };

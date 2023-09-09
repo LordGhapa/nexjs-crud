@@ -13,7 +13,7 @@ import { Posts } from '../../../types/types';
 import Link from 'next/link';
 import { GQL_MUTATION_DELETE_POST } from '../../graphql/mutations/posts';
 
-type newSession = {
+export type newSession = {
   id: string;
   jwt: string;
   expiration: number;
@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 };
 
-type PostsProps = {
+export type PostsProps = {
   posts: Posts;
 };
 export default function PostsPage({ posts }: PostsProps) {
