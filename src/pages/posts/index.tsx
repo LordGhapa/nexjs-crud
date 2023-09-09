@@ -1,18 +1,84 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 import { Wrapper } from '../../components/Wrapper';
+import { SSRedirect } from '../../utils/SSRedirect';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { Session, getServerSession } from 'next-auth';
+import { useSession } from 'next-auth/react';
+import { frontEndRedirect } from '../../utils/front-end-redirect';
+import { gqlClient } from '../../graphql/client';
+import { GQL_QUERY_LOAD_POST } from '../../graphql/query/posts';
+import { Posts } from '../../../types/types';
+import Link from 'next/link';
+type newSession = {
+  id: string;
+  jwt: string;
+  expiration: number;
+} & Session;
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session: newSession = await getServerSession(
+    ctx.req,
+    ctx.res,
+    authOptions,
+  );
 
-export default function Index() {
+  // mandando para pagina de login caso nao esteja logado
+  if (!session) {
+    return SSRedirect('/posts');
+  }
+  try {
+    const { posts }: { posts: Posts } = await gqlClient.request(
+      GQL_QUERY_LOAD_POST,
+      {
+        user_id: session.id,
+      },
+    );
+
+    return {
+      props: {
+        session,
+        posts,
+      },
+    };
+  } catch (e) {
+    console.error(e);
+    return SSRedirect('/404');
+  }
+};
+
+type PostsProps = {
+  posts: Posts;
+};
+export default function PostsPage({ posts }: PostsProps) {
+  const { data: Session, status } = useSession();
+
+  if (status === 'loading') return null;
+  if (!Session) {
+    frontEndRedirect();
+  }
+
   return (
     <>
       <Wrapper>
-        <h1>posts</h1>
+        <h1>Posts</h1>
+        <h2>Criador:{Session?.user?.name?.toUpperCase()}</h2>
+        {posts?.data?.map((post) => (
+          <p key={post?.id} style={{ fontSize: '1.6rem', display: 'flex' }}>
+            <Link
+              href={`/${post.id}`}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                textDecoration: 'none',
+              }}
+            >
+              <span> ❤ {post?.attributes?.title}</span>
+              <span>{post?.attributes?.auth_text}</span>
+            </Link>
+          </p>
+        ))}
       </Wrapper>
     </>
   );
 }
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    props: {},
-  };
-};

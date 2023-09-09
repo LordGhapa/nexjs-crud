@@ -4,6 +4,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { gqlClient } from '../../../graphql/client';
 import { GQL_MUTATION_AUTHENTICATE_USER } from '../../../graphql/mutations/auth';
 
+import type { NextAuthOptions } from 'next-auth';
+
 type LoginResStrapi = {
   login: {
     jwt: string;
@@ -15,6 +17,7 @@ type LoginResStrapi = {
   };
 };
 type NextAuthBaseForStrapi = {
+  user?: { name?: string; email?: string; image?: string };
   id: string;
   jwt: string;
   name: string;
@@ -23,7 +26,8 @@ type NextAuthBaseForStrapi = {
 };
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export default NextAuth({
+
+export const authOptions: NextAuthOptions = {
   session: {
     maxAge: 7 * 24 * 60 * 60,
   },
@@ -118,6 +122,10 @@ export default NextAuth({
         return null;
       }
 
+      if (session.user.image === undefined) {
+        session.user.image = '/assets/images/no-image.jpg';
+      }
+
       session.id = token.id;
       session.jwt = token.jwt;
       session.expiration = token.expiration;
@@ -125,4 +133,6 @@ export default NextAuth({
       return Promise.resolve(session);
     },
   },
-});
+};
+
+export default NextAuth(authOptions);

@@ -9,12 +9,17 @@ export const Menu = () => {
   const [redirect, setRedirect] = useState('/');
 
   useEffect(() => {
+    if (window?.location?.pathname === '/login/') {
+      return;
+    }
     setRedirect(window?.location?.pathname ?? '/');
   }, []);
+
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     signOut({ redirect: false });
   };
+
   return (
     <Styled.Wrapper>
       <Link href="/">Home</Link>

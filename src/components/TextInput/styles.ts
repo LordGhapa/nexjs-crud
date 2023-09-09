@@ -75,7 +75,7 @@ export const Input = styled.input<
     border-radius: ${theme.spacings.tiny};
     outline: none;
     &::placeholder {
-      visibility: hidden;
+     visibility: hidden;
       opacity: 0;
     }
     &:focus {
@@ -121,8 +121,8 @@ export const Input = styled.input<
 
 export const Label = styled.label<{ element: string }>`
   ${({ theme, element }) => css`
-    display: inline;
-    position: absolute;
+  display: inline;
+  position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     left: ${theme.spacings.xsmall};

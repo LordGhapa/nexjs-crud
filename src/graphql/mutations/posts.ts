@@ -40,7 +40,7 @@ mutation UPDATE_POST($id:ID!,$name:String,$auth_text:String) {
 		data {
 			id
 			attributes {
-				name
+				title:name
 				auth_text
         createdAt
 				user {

@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-export const GQL_QUERY_CREATE_POST = gql`
+export const GQL_QUERY_LOAD_POST = gql`
 query GET_POSTS($id: ID,$user_id:ID) {
 	posts: auths(
 		sort: ["id:desc"],
@@ -10,7 +10,7 @@ query GET_POSTS($id: ID,$user_id:ID) {
 		data {
 			id
 			attributes {
-				name
+				title:name
 				auth_text
 				user {
 					data {
@@ -26,5 +26,15 @@ query GET_POSTS($id: ID,$user_id:ID) {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 `;
