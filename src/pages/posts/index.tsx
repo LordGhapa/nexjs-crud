@@ -30,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!session) {
     return SSRedirect('/posts');
   }
+
   try {
     const { posts }: { posts: Posts } = await gqlClient.request(
       GQL_QUERY_LOAD_POST,
@@ -55,6 +56,7 @@ export type PostsProps = {
 };
 export default function PostsPage({ posts }: PostsProps) {
   const { data: Session, status } = useSession();
+
   if (status === 'loading') return null;
   if (!Session) {
     frontEndRedirect();

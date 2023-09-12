@@ -18,7 +18,7 @@ export const Container = styled.div`
     bottom: 0;
     right: 0;
     z-index: 10;
-    background-color: ${theme.colors.primary};
+    background-color: ${theme.colors.deepBlack};
  h2{
   position: absolute;
       color: #fff;
