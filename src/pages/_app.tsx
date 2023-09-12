@@ -9,6 +9,8 @@ import { AppProps } from 'next/app';
 import isPropValid from '@emotion/is-prop-valid';
 import Head from 'next/head';
 
+import NextNProgress from 'nextjs-progressbar';
+
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
@@ -18,6 +20,7 @@ export default function App({
       <SessionProvider session={session}>
         <StyleSheetManager shouldForwardProp={isPropValid}>
           <ThemeProvider theme={theme}>
+            <NextNProgress color={theme.colors.info} height={10} />
             <Component {...pageProps} />
             <Head>
               <title>My new cool app</title>
