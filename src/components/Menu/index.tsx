@@ -15,9 +15,9 @@ export const Menu = () => {
     setRedirect(window?.location?.pathname ?? '/');
   }, []);
 
-  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = async (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    signOut({ redirect: false });
+    await signOut({ callbackUrl: '/' });
   };
 
   return (
