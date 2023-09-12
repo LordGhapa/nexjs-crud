@@ -31,6 +31,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     );
 
+    if (posts.data.length !== 1) {
+      throw new Error('nao exite este post');
+    }
+
     return {
       props: {
         session,
@@ -38,10 +42,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   } catch (e) {
-    return SSRedirect('/');
+    return {
+      redirect: {
+        destination: `/`,
+        permanent: false,
+      },
+    };
   }
 };
-
 export type PostPageProps = {
   posts: Posts;
 };

@@ -23,7 +23,7 @@ export default function App({
             <NextNProgress color={theme.colors.info} height={10} />
             <Component {...pageProps} />
             <Head>
-              <title>My new cool app</title>
+              <title>CRUD</title>
             </Head>
             <GlobalStyles />
           </ThemeProvider>
