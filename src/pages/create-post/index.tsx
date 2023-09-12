@@ -9,6 +9,7 @@ import { getServerSession } from 'next-auth';
 import { GetServerSideProps } from 'next';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { SSRedirect } from '../../utils/SSRedirect';
+import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session: newSession = await getServerSession(
@@ -29,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function CreatePost() {
+  const router = useRouter();
   const { data: Session, status } = useSession();
   if (status === 'loading') return null;
   if (!Session) {
@@ -51,7 +53,7 @@ export default function CreatePost() {
     } catch (e) {
       console.error('erro ao tentar criar um post');
     } finally {
-      window.location.replace('/posts');
+      router.push('/posts');
     }
   };
   return (

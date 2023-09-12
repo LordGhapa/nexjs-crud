@@ -11,6 +11,7 @@ import { SSRedirect } from '../utils/SSRedirect';
 import { useSession } from 'next-auth/react';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { GQL_MUTATION_UPDATE_POST } from '../graphql/mutations/posts';
+import { useRouter } from 'next/router';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session: newSession = await getServerSession(
@@ -55,6 +56,7 @@ export type PostPageProps = {
 };
 
 export default function PostPage({ posts }: PostPageProps) {
+  const router = useRouter();
   const { data: Session, status } = useSession();
   if (status === 'loading') return null;
   if (!Session) {
@@ -78,7 +80,7 @@ export default function PostPage({ posts }: PostPageProps) {
     } catch (e) {
       console.error('erro ao tentar muda o post');
     } finally {
-      window.location.replace('/posts');
+      router.push('/posts');
     }
   };
   return (
