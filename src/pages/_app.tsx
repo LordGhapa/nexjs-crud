@@ -7,6 +7,7 @@ import React from 'react';
 
 import { AppProps } from 'next/app';
 import isPropValid from '@emotion/is-prop-valid';
+import Head from 'next/head';
 
 export default function App({
   Component,
@@ -18,6 +19,9 @@ export default function App({
         <StyleSheetManager shouldForwardProp={isPropValid}>
           <ThemeProvider theme={theme}>
             <Component {...pageProps} />
+            <Head>
+              <title>My new cool app</title>
+            </Head>
             <GlobalStyles />
           </ThemeProvider>
         </StyleSheetManager>

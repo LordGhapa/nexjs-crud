@@ -53,7 +53,6 @@ export default function PostPage({ posts }: PostPageProps) {
     frontEndRedirect();
   }
   const handleSave = async ({ id, attributes: { title, auth_text } }) => {
-    console.log(id, title, auth_text);
     try {
       await gqlClient.request(
         GQL_MUTATION_UPDATE_POST,
