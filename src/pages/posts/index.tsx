@@ -89,6 +89,7 @@ export default function PostsPage({ posts }: PostsProps) {
       setDeleting(false);
     } catch (e) {
       console.error('Nao foi possível excluir este post');
+      setDeleting(false);
     }
   };
 
@@ -112,7 +113,11 @@ export default function PostsPage({ posts }: PostsProps) {
               <span>{post?.attributes?.auth_text}</span>
             </Link>{' '}
             <button
-              style={{ all: 'unset', cursor: 'pointer' }}
+              style={{
+                all: 'unset',
+                cursor: deleting ? 'default' : 'pointer',
+                opacity: deleting ? 0.2 : 1,
+              }}
               onClick={() => handleDelete(post.id)}
               disabled={deleting}
             >
