@@ -9,8 +9,10 @@ export default function RedirectDiscord() {
   useEffect(() => {
     const token = router.query.access_token;
     async function redirect() {
+      const prodServerUrl =
+        process.env.NEXT_PUBLIC_PROD_SERVER || 'http://localhost:1337';
       const teste = await fetch(
-        `http://localhost:1337/api/auth/discord/callback?access_token=${token}`,
+        `${prodServerUrl}/api/auth/discord/callback?access_token=${token}`,
       );
 
       if (!teste.ok) {

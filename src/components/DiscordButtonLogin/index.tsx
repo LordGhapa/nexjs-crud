@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 
 export default function DiscordButtonLogin() {
   const router = useRouter();
-
+  const prodServerUrl =
+    process.env.NEXT_PUBLIC_PROD_SERVER || 'http://localhost:1337';
   async function handleLoginDiscord() {
-    router.push('http://localhost:1337/api/connect/discord');
+    router.push(`${prodServerUrl}/api/connect/discord`);
   }
   return (
     <button
