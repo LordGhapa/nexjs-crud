@@ -7,7 +7,7 @@ import { gqlClient } from '../../graphql/client';
 import { newSession } from '../posts';
 import { getServerSession } from 'next-auth';
 import { GetServerSideProps } from 'next';
-import { authOptions } from '../api/auth/[...nextauth]';
+import { authOptions } from '../api/auth/[[...nextauth]]';
 import { SSRedirect } from '../../utils/SSRedirect';
 import { useRouter } from 'next/router';
 
@@ -45,7 +45,6 @@ export default function CreatePost() {
           auth_text,
         },
         {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           Authorization: `Bearer ${Session.jwt}`,
         },
@@ -58,6 +57,7 @@ export default function CreatePost() {
   };
   return (
     <Wrapper>
+      <h2>Criando Post</h2>
       <FormPost onSave={handleSave} />
     </Wrapper>
   );

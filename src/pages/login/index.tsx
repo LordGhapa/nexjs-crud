@@ -3,6 +3,7 @@ import { FormLogin } from '../../components/FormLogin';
 import { Wrapper } from '../../components/Wrapper';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState('');
@@ -25,9 +26,11 @@ export default function LoginPage() {
     const redirect = router.query?.redirect || '/';
     router.push(redirect as string);
   };
+
   return (
     <>
       <Wrapper>
+        <h2>Login</h2>
         <FormLogin onLogin={handleLogin} errorMessage={error} />
       </Wrapper>
     </>

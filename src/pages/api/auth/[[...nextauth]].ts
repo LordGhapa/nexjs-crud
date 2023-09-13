@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+
 import { gqlClient } from '../../../graphql/client';
 import { GQL_MUTATION_AUTHENTICATE_USER } from '../../../graphql/mutations/auth';
 
 import type { NextAuthOptions } from 'next-auth';
 
 type LoginResStrapi = {
-  login: {
+  login?: {
     jwt: string;
     user: {
       id: string;
@@ -24,6 +24,10 @@ type NextAuthBaseForStrapi = {
   email: string;
   expiration: number;
 };
+type credentialsProps = {
+  email?: string;
+  password?: string;
+} & LoginResStrapi;
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 
@@ -37,19 +41,21 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email or Username' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
-        if (
-          !credentials.email ||
-          credentials.email.length < 3 ||
-          !credentials.password ||
-          credentials.password.length < 3
-        )
-          return;
+      async authorize(credentials: credentialsProps) {
+        // console.log(credentials.login);
+
         try {
-          const { login } = await gqlClient.request<LoginResStrapi>(
-            GQL_MUTATION_AUTHENTICATE_USER,
-            { email: credentials.email, password: credentials.password },
-          );
+          let login: LoginResStrapi['login'];
+          if (credentials.login) {
+            // @ts-ignore
+            login = JSON.parse(credentials.login);
+          } else {
+            const strapiLogin = await gqlClient.request<LoginResStrapi>(
+              GQL_MUTATION_AUTHENTICATE_USER,
+              { email: credentials.email, password: credentials.password },
+            );
+            login = strapiLogin.login;
+          }
 
           const { jwt, user } = login;
           const { id, username, email } = user;
@@ -71,7 +77,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     jwt: async ({
       token,
@@ -103,7 +108,7 @@ export const authOptions: NextAuthOptions = {
 
       return Promise.resolve(token);
     },
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
     // @ts-ignore
     session: async ({
       session,

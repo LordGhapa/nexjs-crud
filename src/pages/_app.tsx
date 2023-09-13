@@ -32,8 +32,6 @@ export default function App({
   }, []);
 
   useEffect(() => {
-    console.warn('FUI CHAMADO');
-
     const start = () => {
       setLoading(true);
     };

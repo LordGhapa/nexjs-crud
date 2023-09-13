@@ -6,7 +6,7 @@ import { gqlClient } from '../graphql/client';
 import { Posts } from '../../types/types';
 import { newSession } from './posts';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]';
+import { authOptions } from './api/auth/[[...nextauth]]';
 import { SSRedirect } from '../utils/SSRedirect';
 import { useSession } from 'next-auth/react';
 import { frontEndRedirect } from '../utils/front-end-redirect';
@@ -85,6 +85,7 @@ export default function PostPage({ posts }: PostPageProps) {
   };
   return (
     <Wrapper>
+      <h2>Editando Post</h2>
       <FormPost post={posts.data[0]} onSave={handleSave} />
     </Wrapper>
   );

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { Wrapper } from '../../components/Wrapper';
 import { SSRedirect } from '../../utils/SSRedirect';
-import { authOptions } from '../api/auth/[...nextauth]';
+import { authOptions } from '../api/auth/[[...nextauth]]';
 import { Session, getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { frontEndRedirect } from '../../utils/front-end-redirect';

@@ -1,7 +1,10 @@
-node_modules
+# .prettierignore
+
+# Ignorar diretórios e arquivos específicos
 .DS_Store
 dist
 dist-ssr
-*.local
 commitlint.config.js
-node_modules/*
+
+# Ignorar diretórios node_modules (e seus subdiretórios)
+**/node_modules/

@@ -1,5 +1,12 @@
 import * as Styled from './styles';
-
-export const Loading = () => {
-  return <Styled.Container />;
+type loadingProps = {
+  children?: React.ReactNode;
+};
+export const Loading = ({ children }: loadingProps) => {
+  return (
+    <>
+      {children}
+      <Styled.Container />;
+    </>
+  );
 };

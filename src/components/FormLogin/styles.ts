@@ -5,7 +5,10 @@ export const Wrapper = styled.form`
   ${({ theme }) => css``}
 `;
 export const ButtonWrapper = styled.div`
-  ${({ theme }) => css``}
+  ${({ theme }) => css`
+  display: flex;
+  gap: 20px;
+  `}
 `;
 export const ErrorMessage = styled.p`
   ${({ theme }) => css`

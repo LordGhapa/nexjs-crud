@@ -3,6 +3,7 @@ import { TextInput } from '../TextInput';
 import * as Styled from './styles';
 import { Envelope, Password } from 'phosphor-react';
 import { Button } from '../Button';
+import DiscordButtonLogin from '../DiscordButtonLogin';
 
 export type FormLoginProps = {
   errorMessage?: string;
@@ -49,6 +50,7 @@ export const FormLogin = ({ errorMessage, onLogin }: FormLoginProps) => {
       )}
       <Styled.ButtonWrapper>
         <Button disabled={loading}>{loading ? 'Aguarde...' : 'Login'}</Button>
+        <DiscordButtonLogin />
       </Styled.ButtonWrapper>
     </Styled.Wrapper>
   );

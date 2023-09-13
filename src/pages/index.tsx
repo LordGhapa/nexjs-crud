@@ -9,8 +9,11 @@ export default function Index() {
   return (
     <>
       <Wrapper>
-        {!Session ? <p>Acesso negado</p> : 'ok'}
-        <h1>Ola {Session?.user?.name || 'Desconhecido'}</h1>
+        {!Session ? <p>Acesso negado</p> : 'Autorizado'}
+        <h1>
+          Ola{' '}
+          {Session?.user?.name || 'Desconhecido faça login ou crie uma conta'}
+        </h1>
       </Wrapper>
     </>
   );
