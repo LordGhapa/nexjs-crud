@@ -30,14 +30,16 @@ export const Menu = () => {
           Sair
         </a>
       ) : (
-        <Link
-          href={{
-            pathname: '/login',
-            query: { redirect },
-          }}
-        >
-          Login
-        </Link>
+        <>
+          <Link href={{ pathname: '/login', query: { redirect } }}>Login</Link>
+          <Link
+            href={{
+              pathname: '/singin',
+            }}
+          >
+            SingIn
+          </Link>
+        </>
       )}
     </Styled.Wrapper>
   );

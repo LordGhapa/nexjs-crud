@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
+    "email-validator": "^2.0.4",
     "graphql": "^16.8.0",
     "graphql-request": "^6.1.0",
     "next": "latest",
@@ -42,6 +43,7 @@
     "@types/styled-components": "^5.1.25",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.0",
+    "browserify-zlib": "^0.2.0",
     "commitizen": "^4.3.0",
     "cz-emoji-conventional": "^1.0.2",
     "eslint": "^8.45.0",
@@ -55,7 +57,8 @@
     "npm-check": "^6.0.1",
     "prettier": "^3.0.0",
     "storybook": "^7.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "zlib": "^1.0.5"
   },
   "lint-staged": {
     "src/**": [

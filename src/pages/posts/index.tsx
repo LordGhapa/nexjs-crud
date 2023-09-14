@@ -98,6 +98,7 @@ export default function PostsPage({ posts }: PostsProps) {
       <Wrapper>
         <h1>Posts</h1>
         <h2>Criador:{Session?.user?.name?.toUpperCase()}</h2>
+        {statePosts.length ? '' : <h2>Crie um post 🤗</h2>}
         {statePosts?.map((post) => (
           <p key={post?.id} style={{ fontSize: '1.6rem', display: 'flex' }}>
             <Link

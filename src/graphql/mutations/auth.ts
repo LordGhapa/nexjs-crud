@@ -12,3 +12,26 @@ mutation AUTHENTICATE_USER($email: String!, $password: String!) {
 	}
 }
 `;
+
+export const GQL_MUTATION_REGISTE_NEW_USER = gql`
+mutation CREATE_USER(
+  $username: String!
+  $email: String!
+  $password: String!
+) {
+  register(
+    input: {
+      username: $username
+      email: $email
+      password: $password
+    }
+  ) {
+    jwt
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+`;

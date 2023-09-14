@@ -1,21 +1,21 @@
-import { FormLogin } from '.';
+import { FormCreateUser } from '.';
 
 export default {
-  title: 'FormLogin',
-  component: FormLogin,
+  title: 'FormCreateUser',
+  component: FormCreateUser,
 };
 
 export const Template = (args) => {
   return (
     <div>
-      <FormLogin {...args} />
+      <FormCreateUser {...args} />
     </div>
   );
 };
 export const WithError = (args) => {
   return (
     <div>
-      <FormLogin {...args} />
+      <FormCreateUser {...args} />
     </div>
   );
 };
