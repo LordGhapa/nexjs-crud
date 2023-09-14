@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { Post } from '../../../types/types';
 import { TextInput } from '../TextInput';
 import { Button } from '../Button';
+import * as Styled from './styles';
 
 export type FormPostProps = {
   onSave?: (post: Post) => Promise<void>;
   post?: Post;
+  errorMessage?: string;
 };
 
-export const FormPost = ({ post, onSave }: FormPostProps) => {
+export const FormPost = ({ post, onSave, errorMessage }: FormPostProps) => {
   const id = post?.id ?? '';
   const title = post?.attributes?.title ?? '';
   const auth_text = post?.attributes?.auth_text ?? '';
@@ -48,6 +50,9 @@ export const FormPost = ({ post, onSave }: FormPostProps) => {
         onInputChange={(e) => setNewContent(e)}
         as="textarea"
       />
+      {errorMessage && (
+        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+      )}
       <Button disabled={saving} type="submit">
         {saving ? 'Salvando...' : 'Salvar'}
       </Button>
