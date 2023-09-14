@@ -39,13 +39,13 @@ export default function LoginPage() {
     const isValidEmail = EmailValidator.validate(email);
 
     if (name.length < 3) {
-      erros.push('Nome deve ter 3 ou mais dígitos');
+      erros.push('Name must have 3 or more digits');
     }
     if (!isValidEmail) {
-      erros.push('Digite um email valido');
+      erros.push('Enter a valid email address');
     }
     if (password.length < 6) {
-      erros.push('Senha deve ter mais de 6 dígitos');
+      erros.push('Password must have more than 6 digits');
     }
     if (erros.length) {
       setError(erros.join(' | '));

@@ -40,7 +40,7 @@ export default function CreatePost() {
   }
   const handleSave = async ({ attributes: { title, auth_text } }) => {
     if (title.length < 3 || auth_text.length < 3) {
-      setError('Titulo e Conteúdo deve ter mais de 3 dígitos');
+      setError('Title e Content should have more than 3 digits');
       return;
     }
     try {

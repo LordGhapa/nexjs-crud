@@ -35,7 +35,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (posts.data.length !== 1) {
       throw new Error('nao exite este post');
     }
-
+    if (
+      session.user.email !== posts.data[0].attributes.user.data.attributes.email
+    ) {
+      throw new Error('');
+    }
     return {
       props: {
         session,
