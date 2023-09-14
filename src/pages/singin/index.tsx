@@ -8,13 +8,16 @@ import { FormCreateUser } from '../../components/FormCreateUser';
 import * as EmailValidator from 'email-validator';
 import { gqlClient } from '../../graphql/client';
 import { GQL_MUTATION_REGISTE_NEW_USER } from '../../graphql/mutations/auth';
+import { Loading } from '../../templates/Loading';
 
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (email: string, password: string) => {
     setError('');
+    setLoading(true);
     const response = await signIn('credentials', {
       email,
       password,
@@ -24,6 +27,7 @@ export default function LoginPage() {
       setError('apos criar a conta nao foi possível fazer o login');
       return;
     }
+    setLoading(false);
     const redirect = router.query?.redirect || '/';
     router.push(redirect as string);
   };
@@ -72,10 +76,14 @@ export default function LoginPage() {
 
   return (
     <>
-      <Wrapper>
-        <h2>SingIn</h2>
-        <FormCreateUser onSingin={handleSingin} errorMessage={error} />
-      </Wrapper>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Wrapper>
+          <h2>SingIn</h2>
+          <FormCreateUser onSingin={handleSingin} errorMessage={error} />
+        </Wrapper>
+      )}
     </>
   );
 }
