@@ -81,10 +81,9 @@ export default function PostPage({ posts }: PostPageProps) {
           Authorization: `Bearer ${Session.jwt}`,
         },
       );
+      router.push('/posts');
     } catch (e) {
       console.error('erro ao tentar muda o post');
-    } finally {
-      router.push('/posts');
     }
   };
   return (

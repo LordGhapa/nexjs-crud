@@ -11,15 +11,15 @@ export default function RedirectDiscord() {
     async function redirect() {
       const prodServerUrl =
         process.env.NEXT_PUBLIC_PROD_SERVER || 'http://localhost:1337';
-      const teste = await fetch(
+      const loginDiscordApi = await fetch(
         `${prodServerUrl}/api/auth/discord/callback?access_token=${token}`,
       );
 
-      if (!teste.ok) {
+      if (!loginDiscordApi.ok) {
         console.warn('erro ao tenta fazer login');
         return;
       }
-      const data = teste;
+      const data = loginDiscordApi;
       const login = await data.json();
 
       await signIn('credentials', {

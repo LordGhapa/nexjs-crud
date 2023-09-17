@@ -55,10 +55,9 @@ export default function CreatePost() {
           Authorization: `Bearer ${Session.jwt}`,
         },
       );
+      router.push('/posts');
     } catch (e) {
       console.error('erro ao tentar criar um post');
-    } finally {
-      router.push('/posts');
     }
   };
   return (
