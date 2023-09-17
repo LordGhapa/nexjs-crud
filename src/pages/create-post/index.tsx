@@ -39,8 +39,8 @@ export default function CreatePost() {
     frontEndRedirect();
   }
   const handleSave = async ({ attributes: { title, auth_text } }) => {
-    if (title.length < 3 || auth_text.length < 3) {
-      setError('Title e Content should have more than 3 digits');
+    if (title.trim().length < 3 || auth_text.trim().length < 3) {
+      setError('Title and Content should have more than 3 digits');
       return;
     }
     try {

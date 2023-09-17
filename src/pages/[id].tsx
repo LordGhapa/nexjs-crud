@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react';
 import { frontEndRedirect } from '../utils/front-end-redirect';
 import { GQL_MUTATION_UPDATE_POST } from '../graphql/mutations/posts';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const session: newSession = await getServerSession(
@@ -59,7 +60,8 @@ export type PostPageProps = {
   posts: Posts;
 };
 
-export default function PostPage({ posts }: PostPageProps) {
+export default function UpdatePostPage({ posts }: PostPageProps) {
+  const [error, setError] = useState('');
   const router = useRouter();
   const { data: Session, status } = useSession();
   if (status === 'loading') return null;
@@ -67,6 +69,10 @@ export default function PostPage({ posts }: PostPageProps) {
     frontEndRedirect();
   }
   const handleSave = async ({ id, attributes: { title, auth_text } }) => {
+    if (title.trim().length < 3 || auth_text.trim().length < 3) {
+      setError('Title and Content should have more than 3 digits');
+      return;
+    }
     try {
       await gqlClient.request(
         GQL_MUTATION_UPDATE_POST,
@@ -89,7 +95,7 @@ export default function PostPage({ posts }: PostPageProps) {
   return (
     <Wrapper>
       <h2>Editando Post</h2>
-      <FormPost post={posts.data[0]} onSave={handleSave} />
+      <FormPost post={posts.data[0]} onSave={handleSave} errorMessage={error} />
     </Wrapper>
   );
 }
